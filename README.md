@@ -16,11 +16,11 @@ docker run -p 8000:8000 ghcr.io/yurikasper/latent-grid:0.1
 Then, just install the client library using your package manager of choice:
 
 ```bash
-npm install @yurikasper/latent-grid@~0.1.1
+npm install @yurikasper/latent-grid@~0.1
 
-pnpm add @yurikasper/latent-grid@~0.1.1
+pnpm add @yurikasper/latent-grid@~0.1
 
-yarn add @yurikasper/latent-grid@~0.1.1
+yarn add @yurikasper/latent-grid@~0.1
 ```
 
 To run an extraction on a given document, provide a public or pre-signed url, along with the other parameters, to one of the given methods:
