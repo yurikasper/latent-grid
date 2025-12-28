@@ -56,7 +56,7 @@ function attachGrid(
         row.forEach((_, colIndex) => {
             const cellIndex = indexGrid?.[rowIndex]?.[colIndex];
             if (
-                !cellIndex ||
+                cellIndex === undefined ||
                 cellIndex < 0 ||
                 cellIndex >= table.cells.length
             ) {
