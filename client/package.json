@@ -1,6 +1,6 @@
 {
     "name": "@yurikasper/latent-grid",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Latent Grid TypeScript client",
     "author": "Yuri Kasper",
     "keywords": [
@@ -8,6 +8,10 @@
         "img2table"
     ],
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yurikasper/latent-grid"
+    },
     "type": "module",
     "publishConfig": {
         "access": "public"
