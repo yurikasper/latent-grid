@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+img2table
+paddlepaddle
+paddleocr
+httpx
+opencv-python-headless
+beautifulsoup4

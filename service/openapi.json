@@ -1,0 +1,378 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Latent Grid Service",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/image": {
+      "post": {
+        "summary": "Process Image",
+        "operationId": "process_image_image_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TableResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Process Image Image Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pdf": {
+      "post": {
+        "summary": "Process Pdf",
+        "operationId": "process_pdf_pdf_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PDFRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PdfTableResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Process Pdf Pdf Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaseRequest": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "implicit_rows": {
+            "type": "boolean",
+            "title": "Implicit Rows",
+            "default": false
+          },
+          "implicit_columns": {
+            "type": "boolean",
+            "title": "Implicit Columns",
+            "default": false
+          },
+          "borderless_tables": {
+            "type": "boolean",
+            "title": "Borderless Tables",
+            "default": false
+          },
+          "min_confidence": {
+            "type": "integer",
+            "maximum": 99.0,
+            "minimum": 0.0,
+            "title": "Min Confidence",
+            "default": 50
+          },
+          "detect_rotation": {
+            "type": "boolean",
+            "title": "Detect Rotation",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "BaseRequest"
+      },
+      "BoundingBox": {
+        "properties": {
+          "x1": {
+            "type": "integer",
+            "title": "X1"
+          },
+          "y1": {
+            "type": "integer",
+            "title": "Y1"
+          },
+          "x2": {
+            "type": "integer",
+            "title": "X2"
+          },
+          "y2": {
+            "type": "integer",
+            "title": "Y2"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x1",
+          "y1",
+          "x2",
+          "y2"
+        ],
+        "title": "BoundingBox"
+      },
+      "CellContent": {
+        "properties": {
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "title": "CellContent"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PDFRequest": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "implicit_rows": {
+            "type": "boolean",
+            "title": "Implicit Rows",
+            "default": false
+          },
+          "implicit_columns": {
+            "type": "boolean",
+            "title": "Implicit Columns",
+            "default": false
+          },
+          "borderless_tables": {
+            "type": "boolean",
+            "title": "Borderless Tables",
+            "default": false
+          },
+          "min_confidence": {
+            "type": "integer",
+            "maximum": 99.0,
+            "minimum": 0.0,
+            "title": "Min Confidence",
+            "default": 50
+          },
+          "detect_rotation": {
+            "type": "boolean",
+            "title": "Detect Rotation",
+            "default": false
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "pdf_text_extraction": {
+            "type": "boolean",
+            "title": "Pdf Text Extraction",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "PDFRequest"
+      },
+      "PdfTableResponse": {
+        "properties": {
+          "box": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "grid": {
+            "items": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Grid"
+          },
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/CellContent"
+            },
+            "type": "array",
+            "title": "Cells"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "box",
+          "title",
+          "grid",
+          "cells",
+          "page"
+        ],
+        "title": "PdfTableResponse"
+      },
+      "TableResponse": {
+        "properties": {
+          "box": {
+            "$ref": "#/components/schemas/BoundingBox"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "grid": {
+            "items": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Grid"
+          },
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/CellContent"
+            },
+            "type": "array",
+            "title": "Cells"
+          }
+        },
+        "type": "object",
+        "required": [
+          "box",
+          "title",
+          "grid",
+          "cells"
+        ],
+        "title": "TableResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
