@@ -8,18 +8,19 @@ This project is meant to be a simple way to integrate table extraction into Type
 
 You can run the extraction service with
 
-```
-docker run -p 8000:8000 ghcr.io/yurikasper/latent-grid:latest
+```bash
+docker run -p 8000:8000 ghcr.io/yurikasper/latent-grid:0.1
+# Replace first "8000" with the port you wish to run the service on
 ```
 
 Then, just install the client library using your package manager of choice:
 
-```
-npm install @yurikasper/latent-grid
+```bash
+npm install @yurikasper/latent-grid@~0.1.1
 
-pnpm add @yurikasper/latent-grid
+pnpm add @yurikasper/latent-grid@~0.1.1
 
-yarn add @yurikasper/latent-grid
+yarn add @yurikasper/latent-grid@~0.1.1
 ```
 
 To run an extraction on a given document, provide a public or pre-signed url, along with the other parameters, to one of the given methods:
