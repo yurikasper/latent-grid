@@ -28,13 +28,13 @@ To run an extraction on a given document, provide a public or pre-signed url, al
 ```js
 const extractor = new TableExtractor("https://extractor-service.example.com");
 
-const tables = extractor.processImage({
+const tables = await extractor.processImage({
     url: "https://bucket.example.com/input.jpg",
     implicit_columns: true,
     implicit_rows: true,
 });
 
-const pdfTables = extractor.processPdf({
+const pdfTables = await extractor.processPdf({
     url: "https://bucket.example.com/input.pdf",
     pages: [1, 2],
 });
