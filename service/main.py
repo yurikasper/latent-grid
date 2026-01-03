@@ -4,12 +4,15 @@ from pydantic import BaseModel, Field
 import httpx
 import os
 import tempfile
-import uvicorn
 from img2table.ocr import PaddleOCR
 from img2table.document import Image, PDF
 from bs4 import BeautifulSoup
 
 app = FastAPI(title="Latent Grid Service", version="0.1.2")
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
 
 # Avoid loading the OCR model when generating OpenAPI schema
 ocr: Optional[PaddleOCR] = None
@@ -207,7 +210,3 @@ async def process_pdf(request: PDFRequest):
     finally:
         if os.path.exists(file_path):
             os.remove(file_path)
-
-if __name__ == "__main__":
-    get_ocr()
-    uvicorn.run(app, host="0.0.0.0", port=8000)
