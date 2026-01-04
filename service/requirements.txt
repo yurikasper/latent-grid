@@ -1,8 +1,8 @@
-fastapi
-uvicorn
-img2table
-paddlepaddle
-paddleocr
 httpx
-opencv-python-headless
 beautifulsoup4
+uvicorn[standard]
+fastapi
+polars[rtcompat]
+paddleocr==3.3.2
+img2table[paddle]==1.4.2
+opencv-python-headless==4.11.0.86
