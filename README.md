@@ -12,6 +12,7 @@ You can run the extraction service with
 docker run -p 8000:8000 ghcr.io/yurikasper/latent-grid:0.1
 # Replace first "8000" with the port you wish to run the service on
 ```
+<sup>* this container doesn't play well with WSL. I wasn't able to get it to work at all, and the python application is very slow (something like 50x slower) when run directly on Windows.</sup>
 
 Then, just install the client library using your package manager of choice:
 
